@@ -1,0 +1,33 @@
+# German translations for gedit-zoom package.
+# Copyright (C) 2010 Christian Luginbühl
+# This file is distributed under the same license as the gedit-zoom package.
+# Christian Luginbuehl <dinkel@pimprecords.com>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gedit-zoom 0.1.0\n"
+"Report-Msgid-Bugs-To: dinkel@pimprecords.com\n"
+"POT-Creation-Date: 2010-05-08 17:57+0200\n"
+"PO-Revision-Date: 2010-05-08 17:57+0200\n"
+"Last-Translator: Christian Luginbuehl <dinkel@pimprecords.com>\n"
+"Language-Team: Swiss-German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: zoom/window_helper.py:79 zoom/window_helper.py:80
+msgid "_Zoom"
+msgstr "_Zoom"
+
+#: zoom/window_helper.py:84 zoom/window_helper.py:85
+msgid "Zoom _In"
+msgstr "Ver_grössern"
+
+#: zoom/window_helper.py:90 zoom/window_helper.py:91
+msgid "Zoom _Out"
+msgstr "Ver_kleinern"
+
+#: zoom/window_helper.py:96 zoom/window_helper.py:97
+msgid "_Reset"
+msgstr "_Normal"
