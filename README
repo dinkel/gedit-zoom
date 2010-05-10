@@ -21,11 +21,11 @@ Development
 
 It proved helpful for development to check out the git-repository to your
 favourite location and create symlinks in your personal plugins directory to
-the necessary files and directories, like so:
+the necessary files and directories. There is a make target, that accomplishes
+this:
 
-$ ln -s ~/${YOUR_REPO_ROOT}/zoom.gedit-plugin \
-        ~/${YOUR_REPO_ROOT}/zoom/ \
-        ~/.gnome2/gedit/plugins/
+$ make install-dev
+
 
 Install
 -------
