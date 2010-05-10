@@ -33,9 +33,8 @@ class WindowHelper:
     _SHRINK_ACCELERATORS = ['<Ctrl>minus', '<Ctrl>KP_Subtract']
     _RESET_ACCELERATORS = ['<Ctrl>0', '<Ctrl>KP_0', '<Ctrl>KP_Insert']
 
-    def __init__(self, plugin, window):
+    def __init__(self, window):
         """Constructor."""
-        self._plugin = plugin
         self._window = window
         self._views = {}
 
@@ -48,19 +47,25 @@ class WindowHelper:
         self._insert_menu()
         self._setup_supplementary_accelerators()
 
-        self._tab_add_event = self._window.connect('tab-added',
-                                                   self._on_tab_added)
-        self._tab_remove_event = self._window.connect('tab-removed',
-                                                      self._on_tab_removed)
+        for view in self._window.get_views():
+            self._initialize_viewhelper(view)
+
+        self._tab_add_handler = self._window.connect('tab-added',
+                                                     self._on_tab_added)
+        self._tab_remove_handler = self._window.connect('tab-removed',
+                                                        self._on_tab_removed)
 
     def deactivate(self):
         """Deactivates the plugin for a window."""
+        for view in self._window.get_views():
+            self._deactivate_viewhelper(view)
+
         self._views = None
 
         self._remove_menu()
         self._window.remove_accel_group(self._accel_group)
-        self._window.disconnect(self._tab_add_event)
-        self._window.disconnect(self._tab_remove_event)
+        self._window.disconnect(self._tab_add_handler)
+        self._window.disconnect(self._tab_remove_handler)
 
         self._plugin = None
         self._window = None
@@ -141,36 +146,40 @@ class WindowHelper:
             self._accel_group.connect_group(key, mod, 0, callback_function)
 
     def _on_tab_added(self, window, tab):
-        """Callback on new tab added - initializes the ViewHelper."""
-        view = tab.get_view()
-
-        if (view and (not view in self._views)):
-            self._views[view] = ViewHelper(view)
+        """Callback on new tab added."""
+        self._initialize_viewhelper(tab.get_view())
 
     def _on_tab_removed(self, window, tab):
         """Callback on tab removal - deactivates the ViewHelper."""
-        view = tab.get_view()
+        self._deactivate_viewhelper(tab.get_view())
 
+    def _initialize_viewhelper(self, view):
+        """Initializes a ViewHelper for view if unknown as of now."""
+        if (view and (not view in self._views)):
+            self._views[view] = ViewHelper(view)
+
+    def _deactivate_viewhelper(self, view):
+        """Deactivates the ViewHelper of view if known."""
         if (view and (view in self._views)):
             self._views[view].deactivate()
             del self._views[view]
 
     # below are the callbacks that are used for both action and accelerators
     # from the main window. because they have a different method signature
-    # but none of the arguments are used, this quite ugly looking attribute
-    # list with default values can be used for both.
+    # but none of the arguments are used, this quite ugly looking all-catching
+    # agrs-attribute is used for both.
 
-    def _enlarge_font(self, a = None, b = None, c = None, d = None):
+    def _enlarge_font(self, *args):
         """Callback to enlarge the font on menu click or accelerator."""
         if (self._has_active_view()):
             self._get_active_viewhelper().enlarge_font()
 
-    def _shrink_font(self, a = None, b = None, c = None, d = None):
+    def _shrink_font(self, *args):
         """Callback to shrink the font on menu click or main accelerator."""
         if (self._has_active_view()):
             self._get_active_viewhelper().shrink_font()
 
-    def _reset_font(self, a = None, b = None, c = None, d = None):
+    def _reset_font(self, *args):
         """Callback to reset the font on menu click or main accelerator."""
         if (self._has_active_view()):
             self._get_active_viewhelper().reset_font()

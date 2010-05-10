@@ -30,7 +30,7 @@ class ZoomPlugin(gedit.Plugin):
 
     def activate(self, window):
         """Activate the plugin for a window."""
-        self._instances[window] = WindowHelper(self, window)
+        self._instances[window] = WindowHelper(window)
 
     def deactivate(self, window):
         """Deactivate the plugin for a window."""

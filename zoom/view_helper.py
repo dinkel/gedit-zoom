@@ -26,15 +26,16 @@ class ViewHelper:
     def __init__(self, view):
         """Constructor."""
         self._view = view
-        self._scrollhandler_id = self._view.connect('scroll_event',
-                                                    self._on_scroll_event)
+        self._scroll_handler = self._view.connect('scroll_event',
+                                                  self._on_scrolling)
         self._fontsize_manipulator = FontsizeManipulator(self._view)
 
     def deactivate(self):
-        """Disconnects the scroll-event."""
-        self._view.disconnect(self._scrollhandler_id)
+        """Resets the font and disconnects the scroll-event."""
+        self.reset_font()
+        self._view.disconnect(self._scroll_handler)
 
-    def _on_scroll_event(self, view, event):
+    def _on_scrolling(self, view, event):
         """Callback on scroll wheel movement."""
         event_consumed = False
 
