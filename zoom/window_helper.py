@@ -29,7 +29,7 @@ class WindowHelper:
 
     # defining the accelerators for the different "actions". the first entry
     # is used as the one that generates the accelerator name in the menu
-    _ENLARGE_ACCELERATORS = ['<Ctrl>plus', '<Ctrl>KP_Add']
+    _ENLARGE_ACCELERATORS = ['<Ctrl>plus', '<Ctrl>equal', '<Ctrl>KP_Add']
     _SHRINK_ACCELERATORS = ['<Ctrl>minus', '<Ctrl>KP_Subtract']
     _RESET_ACCELERATORS = ['<Ctrl>0', '<Ctrl>KP_0', '<Ctrl>KP_Insert']
 
