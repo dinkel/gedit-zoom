@@ -18,17 +18,17 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: zoom/window_helper.py:84 zoom/window_helper.py:85
-msgid "Мас_штаб"
-msgstr ""
+msgid "_Zoom"
+msgstr "Мас_штаб"
 
 #: zoom/window_helper.py:89 zoom/window_helper.py:90
-msgid "У_величить"
-msgstr ""
+msgid "Zoom _In"
+msgstr "У_величить"
 
 #: zoom/window_helper.py:95 zoom/window_helper.py:96
-msgid "У_меньшить"
-msgstr ""
+msgid "Zoom _Out"
+msgstr "У_меньшить"
 
 #: zoom/window_helper.py:101 zoom/window_helper.py:102
-msgid "С_бросить"
-msgstr ""
+msgid "_Reset"
+msgstr "С_бросить"
