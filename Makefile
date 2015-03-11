@@ -1,4 +1,4 @@
-# Whitespace Remover - gedit plugin
+# Zoom - gedit plugin
 # Copyright (C) 2010 Christian Luginbühl
 #
 # This program is free software: you can redistribute it and/or modify
