@@ -16,27 +16,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gedit
+from gedit import Plugin
 
 from window_helper import WindowHelper
 
-class ZoomPlugin(gedit.Plugin):
-    """Plugin that adds the ability to change the size of the text."""
+class ZoomPlugin(Plugin):
+    """ Plugin that adds the ability to change the size of the text. """
 
     def __init__(self):
-        """Constructor."""
-        gedit.Plugin.__init__(self)
-        self._instances = {}
+        """ Constructor. """
+        super(ZoomPlugin, self).__init__(self)
+        self._instances = dict()
 
     def activate(self, window):
-        """Activate the plugin for a window."""
+        """ Activate the plugin for a window. """
         self._instances[window] = WindowHelper(window)
 
     def deactivate(self, window):
-        """Deactivate the plugin for a window."""
+        """ Deactivate the plugin for a window. """
         self._instances[window].deactivate()
         del self._instances[window]
 
     def update_ui(self, window):
-        """Update the user interface for a window."""
+        """ Update the user interface for a window. """
         self._instances[window].update_ui()
