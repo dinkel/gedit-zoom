@@ -17,56 +17,56 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class FontsizeManipulator:
-    """Manipulates the fontsize of a specific view."""
+    """ Manipulates the fontsize of a specific view. """
 
     ZOOM_STEP = 1.090507733 # sqrt(sqrt(sqrt(2)))
     # allowing 16 steps in both directions, 25% - 400% of original size (with
     # a little extra range to deal with rounding errors)
     ZOOM_MAX = 4.1
-    ZOOM_MIN = 0.24
+    ZOOM_MIN = .24
 
     def __init__(self, view):
-        """Constructor."""
+        """ Constructor. """
         self._view = view
         self._context = self._view.get_pango_context()
         self._fontdescription = self._context.get_font_description()
 
-        self._zoomlevel = 1.0
+        self._zoomlevel = 1.
 
         self._original_fontsize = self._get_pango_fontsize()
 
     def enlarge(self):
-        """Enlarges the font up to a defined maximum."""
-        new_zoomlevel = self._zoomlevel * self.__class__.ZOOM_STEP
-        if (new_zoomlevel < self.__class__.ZOOM_MAX):
+        """ Enlarges the font up to a defined maximum."""
+        new_zoomlevel = self._zoomlevel * self.ZOOM_STEP
+        if new_zoomlevel < self.ZOOM_MAX :
             self._zoomlevel = new_zoomlevel
             self._update_font()
 
     def shrink(self):
-        """Shrinks the font down to a defined minimum."""
-        new_zoomlevel = self._zoomlevel / self.__class__.ZOOM_STEP
-        if (new_zoomlevel > self.__class__.ZOOM_MIN):
+        """ Shrinks the font down to a defined minimum. """
+        new_zoomlevel = self._zoomlevel / self.ZOOM_STEP
+        if new_zoomlevel > self.ZOOM_MIN :
             self._zoomlevel = new_zoomlevel
             self._update_font()
 
     def reset(self):
-        """Resets the font to its original size."""
-        self._zoomlevel = 1.0
+        """ Resets the font to its original size. """
+        self._zoomlevel = 1.
         self._update_font()
 
     def _update_font(self):
-        """Does the actual change of the font in the view."""
+        """ Does the actual change of the font in the view. """
         self._fontdescription.set_size(self._calculate_pango_fontsize())
         self._view.set_font(False, self._get_fontname())
 
     def _calculate_pango_fontsize(self):
-        """Calculate the fontsize based on original size and zoomlevel."""
+        """ Calculate the fontsize based on original size and zoomlevel. """
         return int(self._original_fontsize * self._zoomlevel)
 
     def _get_fontname(self):
-        """Returns the fontname to be used in gedit.View.set_font."""
+        """ Returns the fontname to be used in gedit.View.set_font. """
         return self._fontdescription.to_string()
 
     def _get_pango_fontsize(self):
-        """Gets the current font size in pango units."""
+        """ Gets the current font size in pango units. """
         return self._fontdescription.get_size()
