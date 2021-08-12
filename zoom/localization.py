@@ -16,21 +16,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gettext
-import os
+from gettext import install
+from os.path import join, dirname
 
 class Localization():
-    """Provides a helper to easily setup l10n."""
+    """ Provides a helper to easily setup l10n. """
 
     _initialized = False
 
-    _domain = 'messages'
-    _locale_path = os.path.join(os.path.dirname(__file__), 'locale')
+    _domain = "messages"
+    _locale_path = join(dirname(__file__), "locale")
 
     @classmethod
-    def setup(cls):
-        """Sets up the gettext localization."""
+    def setup(self):
+        """ Sets up the gettext localization. """
 
-        if (not cls._initialized):
-            gettext.install(cls._domain, cls._locale_path)
-            cls._initialized = True
+        if (not self._initialized):
+            install(self._domain, self._locale_path)
+            self._initialized = True
